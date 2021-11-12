@@ -15,7 +15,7 @@ class LogController extends Controller
      */
     public function index()
     {
-        $logs = Log::paginate(10);
+        $logs = Log::paginate(15);
 
         return new LogCollection($logs);
     }

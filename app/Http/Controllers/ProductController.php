@@ -41,7 +41,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
+        $products = Product::paginate(15);
 
         return new ProductCollection($products);
     }
@@ -122,9 +122,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+
         $this->logService->storeLog(
-            $product->sku,
-            ["state" => "deleted"]
+            $product,
+            [
+                'Removeu um produto, SKU: '.$product->sku
+            ],
+            'new'
         );
 
         $product->delete();

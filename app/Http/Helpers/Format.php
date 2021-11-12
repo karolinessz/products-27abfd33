@@ -9,6 +9,6 @@ class Format
 
   public static function formatDate($date_time)
   {
-    return Carbon::parse($date_time)->subHours(3)->format('d/m/Y \à\s H:m');
+    return Carbon::parse($date_time)->subHours(3)->format('d/m/Y \à\s H\h');
   }
 }

@@ -24,7 +24,6 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'sku' => 'string|between:2,100|unique:products',
             'stock' => 'numeric|min:0',
             'price' => 'string',
         ];
