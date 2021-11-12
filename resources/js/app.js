@@ -20,6 +20,14 @@ const router = new VueRouter({
     routes,
 })
 
+router.beforeResolve((to, from, next) => {
+    if (to.name == null || to.name == 'Home') {
+        next({name: 'Products'})
+    } else {
+        next();
+    }
+});
+
 const app = new Vue({
     el: '#app',
     components: { App },

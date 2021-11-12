@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Log;
+use App\Http\Resources\LogCollection;
 
 class LogController extends Controller
 {
@@ -14,9 +15,9 @@ class LogController extends Controller
      */
     public function index()
     {
-        $logs = Log::get();
+        $logs = Log::paginate(15);
 
-        return $logs;
+        return new LogCollection($logs);
     }
 
     /**

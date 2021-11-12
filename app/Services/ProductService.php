@@ -31,7 +31,7 @@ class ProductService
 
 		$product->update(
 			$request->only([
-				'sku', 'stock', 'price'
+				'stock', 'price'
 			])
 		);
 

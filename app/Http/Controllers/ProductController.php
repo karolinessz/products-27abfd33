@@ -11,6 +11,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Services\ProductService;
 use App\Http\Requests\UpdateProductRequest;
 use App\Services\LogService;
+use App\Http\Resources\ProductCollection;
 
 class ProductController extends Controller
 {
@@ -40,9 +41,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
+        $products = Product::paginate(15);
 
-        return $products;
+        return new ProductCollection($products);
     }
 
     /**
@@ -58,6 +59,14 @@ class ProductController extends Controller
             $request->name, 
             $request->stock,
             $request->price
+        );
+
+        $this->logService->storeLog(
+            $request,
+            [
+                'Adicionou novo produto, SKU: '.$request->sku
+            ],
+            'new'
         );
 
         return response()->json([
@@ -90,13 +99,14 @@ class ProductController extends Controller
         $changes = array_diff($request->toArray(), $product->toArray());
 
         $this->logService->storeLog(
-            $product->sku,
-            $changes
+            $product,
+            $changes,
+            'edit'
         );
 
         $this->productService->updateProduct(
             $product,
-            $request
+            $request,
         );
 
         return response()->json([
@@ -112,9 +122,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+
         $this->logService->storeLog(
-            $product->sku,
-            ["state" => "deleted"]
+            $product,
+            [
+                'Removeu um produto, SKU: '.$product->sku
+            ],
+            'new'
         );
 
         $product->delete();

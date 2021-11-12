@@ -6,9 +6,15 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
-    extend: {}
+    extend: {
+
+    }
   },
-  variants: {},
+  variants: {
+    extend: {
+      opacity: ['disabled'],
+    }
+  },
   plugins: [
     require('@tailwindcss/ui'),
   ]
