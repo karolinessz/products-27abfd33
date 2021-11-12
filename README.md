@@ -13,10 +13,12 @@ Criar um banco de dados e copiar a env exemplo no projeto, adicionar as informa�
 ### Comandos importantes
 Instalar dependências
 > composer install
+> 
 > npm install
 
 Configurar o ambiente das dependências
 > npm audit fix --force
+> 
 > npm run dev
 
 Configurar ambiente do banco
